@@ -1,0 +1,24 @@
+<view>
+  <image class="bg-image" mode="widthFix" src="/pages/index/IMG_1255.png"></image>
+  <view  wx:if="{{record}}" class="code_box">
+    <view class="code_box_record">
+      <view class="code_box_record_title code_box_record_title_content">奖励内容</view>
+      <view class="code_box_record_title code_box_record_title_number">需要的🍦值</view>
+      <view class="code_box_record_title code_box_record_title_time">操作</view>
+    </view>
+    <view class="line"></view>
+    <view class="code_box_record code_box_record_content" wx:for="{{record}}" wx:key="_id">
+      <view class="code_box_record_detail code_box_record_detail_content">
+        <image wx:if="{{item.goods_image}}"  class="image" mode="scaleToFill" src="{{item.goods_image}}"></image>
+        {{item.goods_content}}
+      </view>
+      <view class="code_box_record_detail code_box_record_detail_number">
+        {{item.goods_integral}}🍦
+      </view>
+      <view class="code_box_record_detail code_box_record_detail_time">
+        <view id="{{item._id}}" class="button" bindtap="showMissionModal">领赏啦~</view>
+      </view>
+    </view>
+  </view>
+  <cloud-tip-modal showUploadTipProps="{{showUploadTip}}"></cloud-tip-modal>
+</view>

@@ -1,0 +1,190 @@
+<!--index.wxml-->
+<image class="bg-image" style="display: {{displayDaka}};" mode="widthFix" src="./IMG_1222.png"></image>
+<image class="bg-image" style="display: {{displayLijia}};" mode="widthFix" src="./IMG_1256.png"></image>
+
+<!--情侣弹框 -->
+<modal hidden="{{myhiddenmodalput}}"   title="oppid{{openid}}我们已经👩‍❤️‍👨{{anniversary}} 天" confirm-text="真好"   bindconfirm="myConfirmM" no-cancel="true" >
+</modal>
+<!--游客弹框 -->
+<modal hidden="{{hiddenmodalput}}"   title="莫莫和冼姐姐已经👩‍❤️‍👨{{anniversary}} 天" confirm-text="验证" cancel-text="取消" bindcancel="cancelM" bindconfirm="confirmM" >
+    <input bindinput='iPSW' type='text' placeholder="请输入爱情密码..." auto-focus/>
+</modal>
+
+
+
+<view class="container">
+
+<view class='power'>
+ <!--切换按钮-->
+ <view class="switch-type" >
+      <view class="btn {{currentSelectTripType == 'daka' ? 'active' : ''}}" bindtap='selectedDaka' data-id='daka'>打卡</view>
+      <view class="btn {{currentSelectTripType == 'lijia' ? 'active' : ''}}" bindtap='selectedLijia' data-id='lijia'>例假</view>
+</view>
+<!-- 打卡整体 -->  
+<view style="display: {{displayDaka}};">
+ <!--打卡日历-->  
+ <view  >
+    <view class='calendar_title flex_nowrap'>
+    <view class='icon' bindtap='lastMonth'>
+      <image src='./left.png' />
+    </view>
+    <view class="dateeee">{{year}}年{{month}}月</view>
+    <view class='icon' bindtap='nextMonth'>
+      <image src='./right.png' />
+    </view>
+  </view>
+ </view>
+<view class='header'>
+    <view wx:for='{{date}}' wx:key="index" class='{{(index == todayIndex) && isTodayWeek ? "weekMark" : ""}}'>{{item}}<view></view></view>
+</view>
+<view class='date-box'>
+    <view wx:for='{{dateArr}}' wx:key="index" class='{{isToday == item.isToday ? "nowDay" : ""}}' data-date='{{item.isToday}}'>
+        <view class='date-head'>
+            <view class='date-num'>{{item.dateNum}}</view>
+        </view>
+    </view>
+</view>
+
+<!--打卡内容-->
+<view class="cont_style"  wx:if="{{userName}}">{{userName}}的🍦:{{userIntegral || 0}} 🍦</view>
+  <view class="power" wx:key="title" wx:for="{{powerList}}" wx:for-item="power">
+    <view wx:if="{{power.showItem}}">
+      <view wx:key="title" wx:for="{{power.item}}">
+        <view class="power_item" bindtap="jumpPage" data-page="{{item.page}}">
+          <view class="power_item_title">{{item.title}}</view>
+          <image class="power_item_icon" src="../../images/arrow.svg"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 例假整体 -->  
+<view style="display: {{displayLijia}};">
+<!-- 日历年月 -->
+<view class='calendar_title flex_nowrap'>
+  <view class='icon' bindtap='lastMonth'>
+    <image src='./left.png' />
+  </view>
+  <view class="dateeee">{{year}}年{{month}}月</view>
+  <view class='icon' bindtap='nextMonth'>
+    <image src='./right.png' />
+  </view>
+</view>
+<view class='header'>
+        <view wx:for='{{date}}' wx:key="index" class='{{(index == todayIndex) && isTodayWeek ? "weekMark" : ""}}'>{{item}}<view></view></view>
+    </view>
+<view class='date-box'>
+    <block wx:for='{{dateArr}}' wx:key='dateArr'>
+      
+        <view class='{{isToday == item.isToday ? "nowDay" : ""}}'>
+            <view class='date-head' bindtap='' data-year='{{year}}' data-month='{{month}}' data-datenum='{{item.dateNum}}'>
+               
+                <view class='date-num'>{{item.dateNum}}</view>
+                <view 
+                class='{{item.isInPeriodList ? "isInPeriodList" : ""}}' 
+                wx:if="{{item.isInPeriodList}}">                
+                </view>
+                <view 
+                class='{{item.isInOvulationPeriod ? "isInOvulationPeriod" : ""}}' 
+                wx:if="{{item.isInPeriodList}} or {{item.isInOvulationPeriod}} or {{item.isInPredictPeriod}} ">                
+                </view>
+                <view 
+                class='{{item.isInPredictPeriod ? "isInPredictPeriod" : ""}}' 
+                wx:if="{{item.isInPredictPeriod}} ">                
+                </view>
+                <view class='{{isToday == item.isToday ? "istoday" : ""}}' wx:if="{{isToday == item.isToday}}">
+                    今天
+                </view>  
+            </view>
+        </view>
+    </block>
+    </view>
+    <view class="date-mark">
+        <view class='period'>
+            <view class='view1'></view>
+            <view class='view2'>经期</view>     
+        </view>
+        <view class='periodForcast'>
+            <view class='view1'></view>
+            <view class='view2'>预测经期时间</view>     
+        </view>
+        <view class='ovulation'>
+            <view class='view1'></view>
+            <view class='view2'>排卵期</view>     
+        </view>
+          
+    </view>
+  <!--记录例假开始-->
+<view class="record-main">
+
+    <block wx:if="{{isInPeriod}}"> 
+        <view class="nextToCome">
+            <view class="forcast">
+                预计下次开始日期
+            </view> 
+            <view class="left" wx:if='{{nextPeriodCount>=0}}'>
+                还剩 
+                <view class="number">{{nextPeriodCount}}</view>
+                天
+            </view>
+            <view class="left" wx:if='{{nextPeriodCount<0}}'>
+                推迟
+                <view class="number">{{-nextPeriodCount}}</view>
+                天
+            </view>
+
+        </view>
+
+        <view class="icon" wx:if="{{isInPeriod}}">
+            <image class="" src="./cola.png" mode="widthFix"/>
+        </view>
+
+        <view class="button-come">
+            <picker mode="date" class="picker" value="{{date}}" start="2019-01-01" end="{{year}}-{{month}}-{{totalDay}}" bindchange="bindDateChange">
+                大姨妈来了
+            </picker>
+        </view>
+
+    </block>
+
+    <block wx:if="{{!isInPeriod}}">
+      <!-- <view class="cont_style_lijia"  > 大姨妈来了 第 {{periodCount}} 天</view> -->
+      <view class="nextToCome">
+        
+        <view class="forcast">
+            大姨妈来了
+        </view>
+        
+        <view class="left">
+            第
+            <view class="number">{{periodCount}}</view>
+            天
+        </view>
+    </view>
+
+        <view class="icon" wx:if="{{!isInPeriod}}">
+            <image class="" src="./candy.png" mode="widthFix"/>  
+        </view>
+        <view class="button-come" style="opacity: 0.9;">
+            <picker  mode="date" class="picker" value="{{date}}" start="2019-01-01" end="{{year}}-{{month}}-{{totalDay}}" bindchange="bindDateChange">
+            大姨妈走了
+            </picker>
+        </view>
+
+    </block>
+</view>
+
+
+
+  </view>
+
+</view>
+   
+<cloud-tip-modal showUploadTipProps="{{showUploadTip}}"></cloud-tip-modal>
+
+
+
+
+
+</view>

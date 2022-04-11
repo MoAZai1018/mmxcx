@@ -1,0 +1,61 @@
+/* 
+此文件为开发者工具生成，生成时间: 2022/4/2 下午8:40:16
+使用方法：
+在 index.wxss 文件末尾引入样式
+```
+@import "./index-wxa-auto-dark.wxss";
+```
+ */
+
+@media (prefers-color-scheme: dark) {
+    .tip {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    .top_tip {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    .box_text {
+        background-color: rgb(17, 17, 17);
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    .code_box {
+        background-color: rgb(17, 17, 17);
+    }
+
+    .code_box_title {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    .code_box_record_title {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    .code_box_record_detail_mission {
+        color: rgb(0, 105, 12);
+    }
+
+    .code_box_record_detail_goods {
+        color: rgb(253, 53, 30);
+    }
+
+    .button {
+        color: rgb(17, 17, 17);
+        background-color: rgb(0, 105, 12);
+    }
+
+    .button_disabled {
+        background-color: rgb(55, 58, 56);
+    }
+
+    .button_clear {
+        color: rgb(0, 105, 12);
+        background-color: rgba(255, 255, 255, 0.03);
+    }
+
+    .line {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+}
