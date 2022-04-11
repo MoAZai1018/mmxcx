@@ -22,12 +22,14 @@ https://bytedance.feishu.cn/docx/doxcnvk58QcRZxmOmHgogANvnQu
 2. 修改日期在目录:miniprogram\pages\index\index.js的第210行   let anniversary_year = "xxxx-xx-xx";
 3. 获取打印openid需在目录：miniprogram\pages\index\index.wxml的第6行与第9行 title=""字段在""加入 {{openid}} 例： title="{{openid}}我们已经👩‍❤️‍👨{{anniversary}} 天" 
 4. 编译完成后 
-![](./miniprogram/images/jc1.png)
+![](./miniprogram/images/jc1.png) 如图所示这个就是你自己的openid 上传一个体验版给你的枕边人使用获取她的openid 后保存备用
+5. 修改使用双方openid在目录：miniprogram\pages\index\index.js的第662行  if(openid=="你的ID"||openid=="你枕边人ID"){
+6. 去掉步骤3的{{openid}} 上传并且部署所有文件 就可以正常使用了
 ### 参考文档
 
 - [云开发文档](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/basis/getting-started.html)
 
-# 迭代1.2.0
+# 更新内容
 - 新增云函数获取用户openID
 - 新增不同用户页面展示弹框处理
 
